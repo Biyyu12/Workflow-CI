@@ -1,0 +1,36 @@
+name: MLflow Retrain
+
+on:
+  workflow_dispatch:  # Manual trigger
+  push:
+    paths:
+      - 'MLProject/**'
+
+jobs:
+  retrain:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        activate-environment: mlflow-env
+        environment-file: MLProject/conda.yaml
+        auto-activate-base: false
+
+    - name: Install MLflow
+      run: pip install mlflow
+
+    - name: Run MLflow Project
+      run: |
+        cd MLProject
+        mlflow run . -P data_path=namadataset_preprocessing/data.csv
+
+    - name: Upload model artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: trained-model
+        path: MLProject/model_artifacts/
