@@ -15,7 +15,7 @@ if __name__ == "__main__":
     n_estimators = int(sys.argv[1]) if len(sys.argv) > 1 else 100
     learning_rate = float(sys.argv[2]) if len(sys.argv) > 2 else 0.1
     max_depth = int(sys.argv[3]) if len(sys.argv) > 3 else 5
-    file_path = sys.argv[4] if len(sys.argv) > 4 else os.path.join(os.path.dirname(os.path.abspath(__file__)), "loan_data_preprocessed.csv")
+    file_path = os.path.abspath(sys.argv[4]) if len(sys.argv) > 4 else os.path.join(os.path.dirname(__file__), "loan_data_preprocessed.csv")
 
     data = pd.read_csv(file_path)
 
@@ -33,7 +33,8 @@ if __name__ == "__main__":
         model = GradientBoostingClassifier(
             n_estimators=n_estimators,
             learning_rate=learning_rate,
-            max_depth=max_depth
+            max_depth=max_depth,
+            random_state=42
         )
         model.fit(X_train, y_train)
 
