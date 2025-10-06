@@ -14,6 +14,17 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    services:
+      mlflow:
+        image: ghcr.io/mlflow/mlflow:latest
+        ports:
+          - 5000:5000
+        options: >-
+          --health-cmd="curl -f http://localhost:5000/health || exit 1"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
     
     steps:
       - uses: actions/checkout@v3
