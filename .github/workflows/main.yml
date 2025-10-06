@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  CSV_URL: "loan_data_preprocessed.csv"
+  CSV_URL: "./MLProject/loan_data_preprocessed.csv"
 
 jobs:
   build:
