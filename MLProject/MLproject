@@ -1,12 +1,16 @@
-name: Workflow-CI
- 
-conda_env: conda.yaml
- 
+name: Loan-Status-Prediction
+
 entry_points:
   main:
     parameters:
       n_estimators: {type: int, default: 100}
-      max_depth: {type: int, default: 5}
       learning_rate: {type: float, default: 0.1}
-      dataset : {type: string, default: "loan_data_preprocessed.csv"}
-    command: "python modelling.py {n_estimators} {learning_rate} {max_depth} {dataset}"
+      max_depth: {type: int, default: 5}
+      dataset: {type: path, default: "loan_data_preprocessed.csv"}
+
+    command: >
+      python modelling.py
+      {n_estimators}
+      {learning_rate}
+      {max_depth}
+      {dataset}
