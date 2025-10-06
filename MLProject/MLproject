@@ -7,5 +7,7 @@ entry_points:
     parameters:
       n_estimators: {type: int, default: 505}
       max_depth: {type: int, default: 35}
+      learning_rate: {type: float, default: 0.01}
       dataset : {type: string, default: "loan_data_preprocessed.csv"}
+
     command: "python modelling.py {n_estimators} {learning_rate} {max_depth} {dataset}"
