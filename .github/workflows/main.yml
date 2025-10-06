@@ -32,8 +32,6 @@ jobs:
           conda env create -f MLProject/conda.yaml || true
           
       - name: Run MLflow project
-        env:
-          CSV_URL: loan_data_preprocessed.csv
         run: |
           mlflow run ./MLProject --env-manager=local -P dataset=$CSV_URL
           
