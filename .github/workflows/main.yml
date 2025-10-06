@@ -28,11 +28,11 @@ jobs:
         uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: mlflow-env
-          environment-file: conda.yaml
+          environment-file: MLProject/conda.yaml
           auto-activate-base: false
       - name: Run mlflow project
         run: |
-          conda run -n mlflow-env mlflow run MLProject --env-manager=local -P dataset=$CSV_URL
+          mlflow run ./MLProject --env-manager=local -P dataset=$CSV_URL
       - name: Save mlruns to repo
         run: |
           git config --global user.name ${{ secrets.USERNAME }}
