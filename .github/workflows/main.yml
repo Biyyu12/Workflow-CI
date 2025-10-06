@@ -32,9 +32,7 @@ jobs:
           auto-activate-base: false
       - name: Run mlflow project
         run: |
-          source ~/.bashrc
-          conda activate mlflow-env
-          mlflow run MLProject --env-manager=local -P dataset=$CSV_URL
+          conda run -n mlflow-env mlflow run MLProject --env-manager=local -P dataset=$CSV_URL
       - name: Save mlruns to repo
         run: |
           git config --global user.name ${{ secrets.USERNAME }}
