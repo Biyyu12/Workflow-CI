@@ -70,11 +70,8 @@ jobs:
 
       - name: Build Docker Model
         run: |
-          mlflow models build-docker \
-            --model-uri "runs:/${{ env.RUN_ID }}/model" \
-            --name "loan-status-prediction" \
-            --build-image "python:3.10"
-
+          mlflow models build-docker --model-uri "runs:/$RUN_ID/model" --name "loan-status-prediction" 
+        
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
@@ -83,7 +80,11 @@ jobs:
 
       - name: Tag Docker Image
         run: |
-          docker tag loan-status-prediction ${{ secrets.DOCKER_HUB_USERNAME }}/loan-status-prediction:latest
+          docker tag cc ${{ secrets.DOCKER_HUB_USERNAME }}/cc:latest
+
+      - name: Push Docker Image
+        run: |
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/cc:latest
 
       - name: Push Docker Image
         run: |
