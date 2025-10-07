@@ -1,0 +1,14 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/mlruns/0/53da093bf66241668eecb1b082d4cc2d/artifacts
+end_time: 1759843249382
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 53da093bf66241668eecb1b082d4cc2d
+run_name: blushing-newt-42
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1759843224671
+status: 3
+tags: []
+user_id: runner
