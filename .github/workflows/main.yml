@@ -9,8 +9,9 @@ on:
       - main
 
 permissions:
-  contents: write
-
+  contents: read
+  packages: write
+  
 env:
   CSV_URL: "./MLProject/loan_data_preprocessed.csv"
   TARGET_VAR: "loan_status"
@@ -62,10 +63,12 @@ jobs:
         with:
           name: trained-model
           path: MLProject/model_artifacts/
+          
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
 
       - name: Build Docker Model
         run: |
-          pip install -U mlflow
           mlflow models build-docker \
             --model-uri "runs:/${{ env.RUN_ID }}/model" \
             --name "loan-status-prediction" \
