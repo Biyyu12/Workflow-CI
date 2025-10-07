@@ -1,0 +1,14 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/mlruns/0/da891f02bf8245b1b52e25eaf8aca8b0/artifacts
+end_time: 1759844561282
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: da891f02bf8245b1b52e25eaf8aca8b0
+run_name: overjoyed-hare-139
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1759844537037
+status: 3
+tags: []
+user_id: runner
