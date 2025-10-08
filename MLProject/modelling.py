@@ -7,6 +7,7 @@ import numpy as np
 import os
 import warnings
 import sys
+import joblib
 
 if __name__ == "__main__":
     warnings.filterwarnings("ignore")
@@ -38,6 +39,9 @@ if __name__ == "__main__":
         )
         model.fit(X_train, y_train)
 
+        os.makedirs("MLProject/model_artifacts", exist_ok=True)
+        joblib.dump(model, "MLProject/model_artifacts/model.pkl")
+
         mlflow.sklearn.log_model(
             sk_model=model,
             artifact_path="model",
@@ -59,4 +63,5 @@ if __name__ == "__main__":
         print(f"Accuracy : {accuracy:.4f}")
         print(f"Precision: {precision:.4f}")
         print(f"Recall   : {recall:.4f}")
+
         print(f"F1-score : {f1:.4f}")
