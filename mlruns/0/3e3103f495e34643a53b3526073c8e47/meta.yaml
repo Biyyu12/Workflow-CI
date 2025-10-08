@@ -1,0 +1,14 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/mlruns/0/3e3103f495e34643a53b3526073c8e47/artifacts
+end_time: 1759931246867
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 3e3103f495e34643a53b3526073c8e47
+run_name: clumsy-hog-241
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1759931222053
+status: 3
+tags: []
+user_id: runner
