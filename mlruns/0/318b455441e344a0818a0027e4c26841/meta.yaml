@@ -1,0 +1,14 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/mlruns/0/318b455441e344a0818a0027e4c26841/artifacts
+end_time: 1759931530604
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 318b455441e344a0818a0027e4c26841
+run_name: resilient-fowl-510
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1759931505836
+status: 3
+tags: []
+user_id: runner
