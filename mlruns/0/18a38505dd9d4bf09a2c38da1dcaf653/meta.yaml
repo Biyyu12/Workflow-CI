@@ -1,0 +1,14 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/mlruns/0/18a38505dd9d4bf09a2c38da1dcaf653/artifacts
+end_time: 1759930737251
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 18a38505dd9d4bf09a2c38da1dcaf653
+run_name: bedecked-chimp-9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1759930712386
+status: 3
+tags: []
+user_id: runner
