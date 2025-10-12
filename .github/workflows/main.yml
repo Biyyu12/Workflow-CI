@@ -49,10 +49,17 @@ jobs:
           
       - name: Check if files exist
         run: |
+          echo "Current directory:"
+          pwd
+          echo ""
           echo "Checking mlruns directory:"
           ls -la mlruns/ || echo "mlruns directory not found"
-          echo "Checking model artifacts:"
+          echo ""
+          echo "Checking MLProject/model_artifacts directory:"
           ls -la MLProject/model_artifacts/ || echo "model_artifacts directory not found"
+          echo ""
+          echo "Checking all .pkl files:"
+          find . -name "*.pkl" -type f
           
       - name: Commit and push changes
         run: |
