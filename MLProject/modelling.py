@@ -44,24 +44,6 @@ if __name__ == "__main__":
 
         mlflow.sklearn.log_model(
             sk_model=model,
-            artifact_path="model",
+            name="model",
             input_example=input_example
         )
-
-        y_pred = model.predict(X_test)
-        accuracy = accuracy_score(y_test, y_pred)
-        precision = precision_score(y_test, y_pred)
-        recall = recall_score(y_test, y_pred)
-        f1 = f1_score(y_test, y_pred)
-
-        mlflow.log_metric("accuracy", accuracy)
-        mlflow.log_metric("precision", precision)
-        mlflow.log_metric("recall", recall)
-        mlflow.log_metric("f1_score", f1)
-
-        print(f"Model training selesai.")
-        print(f"Accuracy : {accuracy:.4f}")
-        print(f"Precision: {precision:.4f}")
-        print(f"Recall   : {recall:.4f}")
-
-        print(f"F1-score : {f1:.4f}")
