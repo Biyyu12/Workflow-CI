@@ -1,0 +1,14 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/mlruns/0/95528750dba24158a0eb8ab18d52e8da/artifacts
+end_time: 1760282374855
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 95528750dba24158a0eb8ab18d52e8da
+run_name: dashing-lamb-345
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760282352996
+status: 3
+tags: []
+user_id: runner
