@@ -19,6 +19,10 @@ jobs:
     runs-on: ubuntu-latest    
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
       - name: Set up Python 3.12.7
         uses: actions/setup-python@v4
         with:
@@ -26,37 +30,49 @@ jobs:
           
       - name: Check Env
         run: |
-          echo $CSV_URL
+          echo "CSV_URL: $CSV_URL"
           
       - name: Install MLflow and dependencies
         run: |
           pip install mlflow
-          pip install -r MLProject/requirements.txt || true
-          conda env create -f MLProject/conda.yaml || true
+          if [ -f MLProject/requirements.txt ]; then
+            pip install -r MLProject/requirements.txt
+          fi
           
       - name: Run MLflow project
         run: |
           mlflow run ./MLProject --env-manager=local -P dataset=$CSV_URL
           
-      - name: Save mlruns to repo
+      - name: Create model artifacts directory if not exists
         run: |
-          git config --global user.name ${{ secrets.USERNAME }}
-          git config --global user.email ${{ secrets.EMAIL }}
-          git add mlruns/
-          git diff --cached --quiet || git commit -m "Save mlruns from CI run"
-          git push origin main
-
-      - name: Commit model artifact to repo
+          mkdir -p MLProject/model_artifacts
+          
+      - name: Check if files exist
         run: |
-          git config --global user.name ${{ secrets.USERNAME }}
-          git config --global user.email ${{ secrets.EMAIL }}
-          git add MLProject/model_artifacts/model.pkl
-          git commit -m "Add trained model artifact"
-          git push origin main
-
+          echo "Checking mlruns directory:"
+          ls -la mlruns/ || echo "mlruns directory not found"
+          echo "Checking model artifacts:"
+          ls -la MLProject/model_artifacts/ || echo "model_artifacts directory not found"
+          
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "${{ secrets.USERNAME }}"
+          git config --global user.email "${{ secrets.EMAIL }}"
+          
+          # Add all changes
+          git add mlruns/ MLProject/model_artifacts/
+          
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update mlruns and model artifacts from CI run [skip ci]"
+            git push origin main
+          fi
           
       - name: Upload model artifact
         uses: actions/upload-artifact@v4
         with:
           name: trained-model
           path: MLProject/model_artifacts/
+          if-no-files-found: warn
