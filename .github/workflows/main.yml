@@ -45,6 +45,15 @@ jobs:
           git add mlruns/
           git diff --cached --quiet || git commit -m "Save mlruns from CI run"
           git push origin main
+
+      - name: Commit model artifact to repo
+        run: |
+          git config --global user.name ${{ secrets.USERNAME }}
+          git config --global user.email ${{ secrets.EMAIL }}
+          git add MLProject/model_artifacts/model.pkl
+          git commit -m "Add trained model artifact"
+          git push origin main
+
           
       - name: Upload model artifact
         uses: actions/upload-artifact@v4
