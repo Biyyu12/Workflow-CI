@@ -1,7 +1,7 @@
 import mlflow
 import pandas as pd
 from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.model_test import train_test_split
+from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 import numpy as np
 import os
@@ -77,3 +77,4 @@ if __name__ == "__main__":
             print(f"  File size: {os.path.getsize(model_path)} bytes")
         else:
             print(f"✗ ERROR: Model file not found at: {model_path}")
+
