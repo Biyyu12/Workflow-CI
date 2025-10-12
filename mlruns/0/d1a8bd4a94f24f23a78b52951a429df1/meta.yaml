@@ -1,0 +1,14 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/mlruns/0/d1a8bd4a94f24f23a78b52951a429df1/artifacts
+end_time: 1760283045110
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: d1a8bd4a94f24f23a78b52951a429df1
+run_name: zealous-foal-201
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760283021052
+status: 3
+tags: []
+user_id: runner
