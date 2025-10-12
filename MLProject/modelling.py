@@ -1,7 +1,7 @@
 import mlflow
 import pandas as pd
 from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.model_selection import train_test_split
+from sklearn.model_test import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 import numpy as np
 import os
@@ -17,6 +17,9 @@ if __name__ == "__main__":
     learning_rate = float(sys.argv[2]) if len(sys.argv) > 2 else 0.1
     max_depth = int(sys.argv[3]) if len(sys.argv) > 3 else 5
     file_path = os.path.abspath(sys.argv[4]) if len(sys.argv) > 4 else os.path.join(os.path.dirname(__file__), "loan_data_preprocessed.csv")
+
+    print(f"Current working directory: {os.getcwd()}")
+    print(f"Loading data from: {file_path}")
 
     data = pd.read_csv(file_path)
 
@@ -39,12 +42,38 @@ if __name__ == "__main__":
         )
         model.fit(X_train, y_train)
 
+        # Log predictions for evaluation
+        y_pred = model.predict(X_test)
+        
+        # Log metrics
+        mlflow.log_metric("accuracy", accuracy_score(y_test, y_pred))
+        mlflow.log_metric("precision", precision_score(y_test, y_pred, average='weighted'))
+        mlflow.log_metric("recall", recall_score(y_test, y_pred, average='weighted'))
+        mlflow.log_metric("f1_score", f1_score(y_test, y_pred, average='weighted'))
+        
+        # Log parameters
+        mlflow.log_param("n_estimators", n_estimators)
+        mlflow.log_param("learning_rate", learning_rate)
+        mlflow.log_param("max_depth", max_depth)
+
+        # Log model to MLflow
         mlflow.sklearn.log_model(
             sk_model=model,
-            name="model",
+            artifact_path="model",
             input_example=input_example
         )
 
-        os.makedirs("MLProject/model_artifacts", exist_ok=True)
-        joblib.dump(model, "MLProject/model_artifacts/model.pkl")
-
+        # Save model to artifacts directory (relative path from MLProject/)
+        model_dir = "model_artifacts"
+        os.makedirs(model_dir, exist_ok=True)
+        model_path = os.path.join(model_dir, "model.pkl")
+        
+        joblib.dump(model, model_path)
+        print(f"Model saved to: {os.path.abspath(model_path)}")
+        
+        # Verify file exists
+        if os.path.exists(model_path):
+            print(f"✓ Model file verified at: {model_path}")
+            print(f"  File size: {os.path.getsize(model_path)} bytes")
+        else:
+            print(f"✗ ERROR: Model file not found at: {model_path}")
