@@ -39,11 +39,12 @@ if __name__ == "__main__":
         )
         model.fit(X_train, y_train)
 
-        os.makedirs("MLProject/model_artifacts", exist_ok=True)
-        joblib.dump(model, "MLProject/model_artifacts/model.pkl")
-
         mlflow.sklearn.log_model(
             sk_model=model,
             name="model",
             input_example=input_example
         )
+
+        os.makedirs("MLProject/model_artifacts", exist_ok=True)
+        joblib.dump(model, "MLProject/model_artifacts/model.pkl")
+
